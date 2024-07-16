@@ -9,11 +9,12 @@ import { IEducationInfo, IUserInfomation } from '../../interface/IForm.interface
 import { ActivatedRoute } from '@angular/router';
 import { ContactComponent } from '../contact/contact.component';
 import { EducationComponent } from '../education/education.component';
+import { ExperienceComponent } from "../experience/experience.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule, ContactComponent, EducationComponent],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule, ContactComponent, EducationComponent, ExperienceComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })

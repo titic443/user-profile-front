@@ -53,6 +53,6 @@ export class EducationComponent {
       const totalHeight = (itemGap * (itemCount - 1));
       return `${totalHeight}rem`;
     }
-    return `0rem`
+    return `h-auto`
   }
 }

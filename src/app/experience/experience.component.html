@@ -1,11 +1,11 @@
-<div class="flex flex-col mt-10 w-4/5 mx-auto" [style.height]="calcHeight()">
-  <h1 class="text-2xl font-bold mb-6">EDUCATION INFORMATION</h1>
+<div class="flex flex-col mt-40 w-4/5 mx-auto h-screen">
+  <h1 class="text-2xl font-bold mb-6">EXPERIENCE INFORMATION</h1>
   <div class="flex flex-col">
     <div
       *ngIf="initData"
       class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl text-center my-auto"
     >
-      ADD EDUCATION
+      ADD EXPERIENCE
 
       <div
         *ngIf="initData"
@@ -15,7 +15,7 @@
           *ngIf="initData"
           class="flex flex-col justify-center items-center pr-4 gap-20 mt-4"
         >
-          <div *ngFor="let data of initData">{{ data.year }}</div>
+          <div *ngFor="let data of initData">{{ data.fromDate }}</div>
         </div>
         <div
           *ngIf="initData"
@@ -31,11 +31,11 @@
           *ngIf="initData"
           class="flex flex-col justify-center items-center pl-4 gap-20 mt-4"
         >
-          <div *ngFor="let data of initData">{{ data.university }}</div>
+          <div *ngFor="let data of initData">{{ data.toDate }}</div>
         </div>
       </div>
     </div>
-    <div
+    <!-- <div
       *ngIf="!initData"
       [formGroup]="educationForm"
       class="flex flex-col items-center justify-center"
@@ -78,6 +78,6 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

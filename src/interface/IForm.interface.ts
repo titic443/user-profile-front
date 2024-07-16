@@ -30,7 +30,7 @@ export interface IContactInfo {
 
 export interface IEducationInfo { year?: string, university?: string }
 
-interface IExperienceInfo { fromDate?: string, toDate?: string, experience?: string }
+export interface IExperienceInfo { fromDate?: string, toDate?: string, experience?: string }
 
 interface ISkillInfo { skill?: string, rate?: number }
 
