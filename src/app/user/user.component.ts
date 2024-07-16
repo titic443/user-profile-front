@@ -7,17 +7,20 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { IUserInfomation } from '../../interface/IForm.interface';
 import { ActivatedRoute } from '@angular/router';
+import { ContactComponent } from '../contact/contact.component';
+import { EducationComponent } from '../education/education.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule, ContactComponent, EducationComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
   faCamera = faCamera;
   userForm: FormGroup
+  contactForm: FormGroup;
   position?: Array<string>
   fileCover: File | null = null;
   fileProfile: File | null = null
@@ -37,7 +40,7 @@ export class UserComponent {
       tel: [''],
       startDate: ['']
     });
-
+    this.contactForm = this.fb.group({})
   }
 
 
@@ -53,12 +56,11 @@ export class UserComponent {
       }).catch(error => {
         console.error('Error fetching user data:', error);
       });
+    } else {
+      this.fetchDropdownPosition().then((v) => {
+        this.position = v
+      }).catch(error => console.log(error))
     }
-
-    this.fetchDropdownPosition().then((v) => {
-      console.log(v)
-      this.position = v
-    }).catch(error => console.log(error))
   }
 
   async fetchUserData(id: string): Promise<IUserInfomation> {
@@ -77,7 +79,6 @@ export class UserComponent {
   async fetchDropdownPosition() {
     try {
       const result = await axios.get('http://localhost:3000/user/position')
-      console.log(result)
       if (result.status == 200) {
         return result.data
       }
@@ -111,11 +112,16 @@ export class UserComponent {
     this.fileProfile = file
   }
 
-  async onSubmit() {
-    console.log('post data to backend')
-    console.log(this.userForm.value)
-    await axios.post('http://localhost:3000/user', this.userForm.value)
+  onContactFormChange(contactForm: FormGroup): void {
+    this.contactForm = contactForm
   }
 
-
+  async onSubmit() {
+    const combineData = {
+      ...this.userForm.value,
+      contactInfo: { ...this.contactForm.value }
+    }
+    console.log(combineData)
+    await axios.post('http://localhost:3000/user', combineData)
+  }
 }

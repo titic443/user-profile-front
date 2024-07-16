@@ -5,11 +5,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { UserComponent } from './user/user.component';
+import { ContactComponent } from './contact/contact.component';
+import { EducationComponent } from './education/education.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, UserComponent],
+  imports: [CommonModule, RouterOutlet, UserComponent, ContactComponent, EducationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

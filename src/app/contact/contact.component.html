@@ -1,1 +1,89 @@
-<p>contact works!</p>
+<div class="mt-10 w-4/5 mx-auto h-[40vh]">
+  <h1 class="text-2xl font-bold">CONTACT INFORMATION</h1>
+  <form class="flex flex-col" [formGroup]="contactForm">
+    <div class="flex flex-col">
+      <label for="ADDRESS">ADDRESS</label>
+      <input
+        [readonly]="initData"
+        [value]="initData?.address"
+        type="text"
+        class="border border-black rounded-md pr-10"
+        formControlName="address"
+      />
+    </div>
+    <div class="grid grid-cols-4 gap-5">
+      <div class="flex flex-col">
+        <label for="SUB DISTRICT">SUB DISTRICT</label>
+        <input
+          [readonly]="initData"
+          [value]="initData?.subdistrict"
+          type="text"
+          class="border border-black rounded-md pr-10"
+          formControlName="subdistrict"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="DISTRICT">DISTRICT</label>
+        <input
+          [readonly]="initData"
+          [value]="initData?.district"
+          type="text"
+          class="border border-black rounded-md pr-10"
+          formControlName="district"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="PROVINCE">PROVINCE</label>
+        <input
+          [readonly]="initData"
+          [value]="initData?.province"
+          type="text"
+          class="border border-black rounded-md pr-10"
+          formControlName="province"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="POSTAL CODE">POSTAL CODE</label>
+        <input
+          [readonly]="initData"
+          [value]="initData?.postalCode"
+          type="text"
+          class="border border-black rounded-md pr-10"
+          formControlName="postalCode"
+        />
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-5">
+      <div class="flex flex-col">
+        <label for="FACEBOOK">FACEBOOK</label>
+        <input
+          [readonly]="initData"
+          [value]="initData?.facebook"
+          type="text"
+          class="border border-black rounded-md pr-10"
+          formControlName="facebook"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="LINE ID">LINE ID</label>
+        <input
+          [readonly]="initData"
+          [value]="initData?.lineId"
+          type="text"
+          class="border border-black rounded-md pr-10"
+          formControlName="lineId"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="INSTAGRAM">INSTAGRAM</label>
+        <input
+          [readonly]="initData"
+          [value]="initData?.instagram"
+          type="text"
+          class="border border-black rounded-md pr-10"
+          formControlName="instagram"
+        />
+      </div>
+    </div>
+  </form>
+</div>

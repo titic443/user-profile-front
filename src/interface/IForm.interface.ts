@@ -17,7 +17,7 @@ export interface IUserInfomation {
     guildInfo?: string[]
 }
 
-interface IContactInfo {
+export interface IContactInfo {
     address?: string,
     subdistrict?: string,
     district?: string,

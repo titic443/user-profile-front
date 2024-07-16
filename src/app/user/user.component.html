@@ -48,107 +48,121 @@
     />
   </div>
 
-  <div class="flex justify-center items-center ml-auto lg:ml-80">
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-      <div class="grid grid-cols-2 gap-10 mt-10">
-        <div class="flex flex-col">
-          <label for="USERNAME">USERNAME</label>
-          <input
-            [readonly]="initData"
-            type="text"
-            [value]="initData?.username"
-            formControlName="username"
-            class="border border-black rounded-md pr-10"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="NICKNAME">NICKNAME</label>
-          <input
-            type="text"
-            [readonly]="initData"
-            [value]="initData?.nickname"
-            formControlName="nickname"
-            class="border border-black rounded-md pr-10"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="FIRSTNAME">FIRST NAME</label>
-          <input
-            type="text"
-            [readonly]="initData"
-            [value]="initData?.firstname"
-            formControlName="firstname"
-            class="border border-black rounded-md pr-10"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="LASTNAME">LAST NAME</label>
-          <input
-            type="text"
-            [readonly]="initData"
-            [value]="initData?.lastname"
-            formControlName="lastname"
-            class="border border-black rounded-md pr-10"
-          />
-        </div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="flex justify-center items-center ml-auto lg:ml-80">
+      <div class="flex flex-col mt-10">
+        <h1 class="text-2xl font-bold">USER INFORMATION</h1>
+        <div class="grid grid-cols-2 gap-10 mt-10">
+          <div class="flex flex-col">
+            <label for="USERNAME">USERNAME</label>
+            <input
+              [readonly]="initData"
+              type="text"
+              [value]="initData?.username"
+              formControlName="username"
+              class="border border-black rounded-md pr-10"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="NICKNAME">NICKNAME</label>
+            <input
+              type="text"
+              [readonly]="initData"
+              [value]="initData?.nickname"
+              formControlName="nickname"
+              class="border border-black rounded-md pr-10"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="FIRSTNAME">FIRST NAME</label>
+            <input
+              type="text"
+              [readonly]="initData"
+              [value]="initData?.firstname"
+              formControlName="firstname"
+              class="border border-black rounded-md pr-10"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="LASTNAME">LAST NAME</label>
+            <input
+              type="text"
+              [readonly]="initData"
+              [value]="initData?.lastname"
+              formControlName="lastname"
+              class="border border-black rounded-md pr-10"
+            />
+          </div>
 
-        <div class="flex flex-col">
-          <label for="POSITION">POSITION</label>
-          <select
-            name="position"
-            id="position"
-            class="border border-black rounded-md pr-10"
-            formControlName="lastname"
-          >
-            <option value=""></option>
-            <option *ngFor="let pos of this.position" [value]="pos">
-              {{ pos }}
-            </option>
-          </select>
-        </div>
-        <div class="flex flex-col">
-          <label for="NATIONALITY">NATIONALITY</label>
-          <input
-            type="text"
-            [readonly]="initData"
-            [value]="initData?.nationality"
-            formControlName="nationality"
-            class="border border-black rounded-md pr-10"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="TEL">TELEPHONE NUMBER</label>
-          <input
-            type="text"
-            [readonly]="initData"
-            [value]="initData?.tel"
-            formControlName="tel"
-            class="border border-black rounded-md pr-10"
-          />
-        </div>
+          <div class="flex flex-col">
+            <label for="POSITION">POSITION</label>
+            <input
+              *ngIf="!position"
+              type="text"
+              [readonly]="initData"
+              [value]="initData?.nationality"
+              formControlName="nationality"
+              class="border border-black rounded-md pr-10"
+            />
+            <select
+              *ngIf="position"
+              name="position"
+              id="position"
+              class="border border-black rounded-md pr-10"
+              formControlName="lastname"
+            >
+              <option value=""></option>
+              <option *ngFor="let pos of this.position" [value]="pos">
+                {{ pos }}
+              </option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label for="NATIONALITY">NATIONALITY</label>
+            <input
+              type="text"
+              [readonly]="initData"
+              [value]="initData?.nationality"
+              formControlName="nationality"
+              class="border border-black rounded-md pr-10"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="TEL">TELEPHONE NUMBER</label>
+            <input
+              type="text"
+              [readonly]="initData"
+              [value]="initData?.tel"
+              formControlName="tel"
+              class="border border-black rounded-md pr-10"
+            />
+          </div>
 
-        <div class="flex flex-col">
-          <label for="STARTDATE">STARTING DATE</label>
-          <input
-            type="date"
-            value=""
-            id="startDate"
-            name="startDate"
-            formControlName="startDate"
-            class="border border-black rounded-md pr-10"
-          />
-          <!-- <input
-            type="text"
-            [readonly]="initData"
-            [value]="initData?.startDate"
-            formControlName="startDate"
-            class="border border-black rounded-md pr-10"
-          /> -->
+          <div class="flex flex-col">
+            <label for="STARTDATE">STARTING DATE</label>
+            <input
+              type="date"
+              value=""
+              id="startDate"
+              name="startDate"
+              formControlName="startDate"
+              class="border border-black rounded-md pr-10"
+            />
+          </div>
         </div>
       </div>
-      <button type="submit" class="mt-4 p-2 bg-blue-500 text-white">
-        Submit
-      </button>
-    </form>
-  </div>
+    </div>
+    <app-contact
+      (formChange)="onContactFormChange($event)"
+      [initData]="initData?.contactInfo"
+    ></app-contact>
+    <!-- <app-education></app-education> -->
+    <button
+      *ngIf="!initData"
+      type="submit"
+      class="mt-4 p-2 bg-blue-500 text-white"
+    >
+      Submit
+    </button>
+  </form>
 </div>
