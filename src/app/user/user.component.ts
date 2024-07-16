@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { IUserInfomation } from '../../interface/IForm.interface';
+import { IEducationInfo, IUserInfomation } from '../../interface/IForm.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ContactComponent } from '../contact/contact.component';
 import { EducationComponent } from '../education/education.component';
@@ -29,7 +29,7 @@ export class UserComponent {
   initData?: IUserInfomation
   id?: string
   contactForm: FormGroup;
-  educationForm: FormGroup;
+  educationForm: FormGroup
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.userForm = this.fb.group({
@@ -143,7 +143,7 @@ export class UserComponent {
     const combineData = {
       ...this.userForm.value,
       contactInfo: { ...this.contactForm.value },
-      // educationInfo: this.educationForm.value.educationList
+      educationForm: [...this.educationForm.value['educationList']]
     }
     console.log(combineData)
     await axios.post('http://localhost:3000/user', combineData)

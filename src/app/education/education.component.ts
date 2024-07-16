@@ -1,55 +1,49 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { IEducationInfo } from '../../interface/IForm.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-education',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './education.component.html',
-  styleUrl: './education.component.css'
+  styleUrls: ['./education.component.css']
 })
-export class EducationComponent implements OnChanges {
-  addEducation: boolean
-  educationForm: FormGroup
-  @Input() initData?: IEducationInfo[]
-  @Output() formChange = new EventEmitter<FormGroup>()
-
+export class EducationComponent {
+  addEducation: boolean = false;
+  educationForm: FormGroup;
+  @Input() initData?: IEducationInfo[];
+  @Output() formChange = new EventEmitter<FormGroup>();
 
   constructor(private fb: FormBuilder) {
-    this.addEducation = false;
     this.educationForm = this.fb.group({
       educationList: this.fb.array([])
-    });
+    })
+  }
 
+  get educationList() {
+    return this.educationForm.controls["educationList"] as FormArray
+  }
+
+  ngOnInit(): void {
     this.educationForm.valueChanges.subscribe(() => {
       this.formChange.emit(this.educationForm);
     });
   }
 
-
-
-  onClickAddEducation() {
-    this.addEducation = !this.addEducation
-    console.log(this.addEducation)
+  addEducationEntry(): void {
+    const educationEntry = this.fb.group({
+      year: [''],
+      university: ['']
+    });
+    this.educationList.push(educationEntry);
+    this.educationForm.value
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes && !this.initData) {
-
-    }
+  removeEducationEntry(index: number) {
+    this.educationList.removeAt(index)
   }
-  get educationList() {
-    return this.educationForm.get('educationList') as FormArray;
-  }
-
-  addEducationEntry() {
-    const item = this.fb.group({ year: [""], university: [""] })
-    this.educationList.push(item)
-    console.log(this.educationList.value)
-  }
-
 
   calcHeight(): string {
     if (this.initData) {
@@ -61,8 +55,4 @@ export class EducationComponent implements OnChanges {
     }
     return `0rem`
   }
-  onSubmit() {
-    console.log(this.educationForm.value);
-  }
-
 }

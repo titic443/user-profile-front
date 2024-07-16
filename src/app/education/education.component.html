@@ -1,9 +1,9 @@
 <div class="flex flex-col mt-10 w-4/5 mx-auto h-screen">
   <h1 class="text-2xl font-bold mb-6">EDUCATION INFORMATION</h1>
   <div class="flex flex-col">
-    <button
+    <div
       *ngIf="initData"
-      class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
+      class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl text-center my-auto"
     >
       ADD EDUCATION
 
@@ -34,40 +34,50 @@
           <div *ngFor="let data of initData">{{ data.university }}</div>
         </div>
       </div>
-    </button>
-    <button
-      class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
-      (click)="addEducationEntry()"
-    >
-      ADD EDUCATION
-    </button>
-    <form
+    </div>
+    <div
+      *ngIf="!initData"
       [formGroup]="educationForm"
-      (ngSubmit)="onSubmit()"
-      class="flex flex-col items-center justify-center mx-auto text-lg"
+      class="flex flex-col items-center justify-center"
     >
-      <div
-        [formGroupName]="i"
-        *ngFor="let edu of educationList.controls; let i = index"
-        class="flex justify-center items-center relative mt-5 text-gray-600 w-full gap-4"
+      <button
+        type="button"
+        class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
+        (click)="addEducationEntry()"
       >
-        <input
-          type="text"
-          formControlName="year"
-          placeholder="Year"
-          class="border border-black rounded-md pr-10"
-        />
-        <input
-          type="text"
-          formControlName="university"
-          placeholder="University"
-          class="border border-black rounded-md pr-10"
-        />
-      </div>
-
-      <button type="submit" class="mt-5 p-1 bg-blue-500 text-white rounded-xl">
-        Submit
+        ADD EDUCATION
       </button>
-    </form>
+
+      <div
+        formArrayName="educationList"
+        class="flex flex-col items-center justify-center"
+      >
+        <div
+          *ngFor="let edu of educationList.controls; let i = index"
+          [formGroupName]="i"
+          class="flex justify-center items-center relative mt-5 text-gray-600 w-full gap-4"
+        >
+          <input
+            type="text"
+            formControlName="year"
+            placeholder="Year"
+            class="border border-black rounded-md pr-10"
+          />
+          <input
+            type="text"
+            formControlName="university"
+            placeholder="University"
+            class="border border-black rounded-md pr-10"
+          />
+          <button
+            type="button"
+            class="ml-2 p-1 bg-red-500 text-white rounded-xl"
+            (click)="removeEducationEntry(i)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
