@@ -22,6 +22,7 @@ export class UserComponent {
   userForm: FormGroup
   contactForm: FormGroup;
   position?: Array<string>
+  // location?: Record<string, Record<string, string>>
   fileCover: File | null = null;
   fileProfile: File | null = null
   imageCoverUrl?: string | ArrayBuffer | null | undefined;
@@ -45,7 +46,7 @@ export class UserComponent {
 
 
 
-
+  location?: Record<string, Record<string, string>>
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id']
@@ -59,6 +60,10 @@ export class UserComponent {
     } else {
       this.fetchDropdownPosition().then((v) => {
         this.position = v
+      }).catch(error => console.log(error))
+      this.fetchDropdownLocation().then((v) => {
+        this.location = v
+        console.log(this.location)
       }).catch(error => console.log(error))
     }
   }
@@ -79,6 +84,18 @@ export class UserComponent {
   async fetchDropdownPosition() {
     try {
       const result = await axios.get('http://localhost:3000/user/position')
+      if (result.status == 200) {
+        return result.data
+      }
+      return result.data
+    } catch (err) {
+      throw err
+    }
+  }
+
+  async fetchDropdownLocation() {
+    try {
+      const result = await axios.get('http://localhost:3000/user/location')
       if (result.status == 200) {
         return result.data
       }

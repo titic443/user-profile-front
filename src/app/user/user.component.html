@@ -155,6 +155,7 @@
     <app-contact
       (formChange)="onContactFormChange($event)"
       [initData]="initData?.contactInfo"
+      [initLocation]="location ? location : {}"
     ></app-contact>
     <!-- <app-education></app-education> -->
     <button
