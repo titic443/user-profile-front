@@ -1,0 +1,122 @@
+<div class="bg-orange-300 h-2/6 relative">
+  <div
+    class="absolute bg-white rounded-full w-[350px] h-[350px] top-[8rem] left-[8rem] flex justify-center items-center"
+  >
+    <img
+      *ngIf="imageProfileUrl"
+      [src]="imageProfileUrl"
+      alt=""
+      class="w-[95%] h-[95%] rounded-full relative z-40"
+    />
+    <div
+      class="bg-gray-400 w-[95%] h-[95%] rounded-full relative z-30"
+      *ngIf="!imageProfileUrl"
+    ></div>
+    <button
+      class="absolute z-50 bg-gray-300 py-1 px-2 flex justify-center items-center rounded-full text-2xl top-[14rem] left-[19rem]"
+      (click)="profileInput.click()"
+    >
+      <fa-icon [icon]="faCamera"></fa-icon>
+    </button>
+    <input
+      #profileInput
+      type="file"
+      (change)="onFileProfileSelected($event)"
+      style="display: none"
+    />
+  </div>
+
+  <img
+    *ngIf="imageCoverUrl"
+    [src]="imageCoverUrl"
+    alt=""
+    class="z-40 h-full w-screen"
+  />
+  <button
+    class="absolute bottom-3 right-10 h-[40px] bg-gray-300 w-[200px] flex justify-center items-center gap-2 rounded-lg"
+    (click)="coverInput.click()"
+  >
+    <fa-icon [icon]="faCamera"></fa-icon>
+    EDIT COVER PHOTO
+  </button>
+  <input
+    #coverInput
+    type="file"
+    (change)="onFileCoverSelected($event)"
+    style="display: none"
+  />
+</div>
+
+<div class="flex justify-center items-center ml-80">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-2 gap-10 mt-10">
+      <div class="flex flex-col">
+        <label for="USERNAME">USERNAME</label>
+        <input
+          type="text"
+          formControlName="username"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="NICKNAME">NICKNAME</label>
+        <input
+          type="text"
+          formControlName="nickname"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="FIRSTNAME">FIRST NAME</label>
+        <input
+          type="text"
+          formControlName="firstname"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="LASTNAME">LAST NAME</label>
+        <input
+          type="text"
+          formControlName="lastname"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="POSITION">POSITION</label>
+        <input
+          type="text"
+          formControlName="position"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="NATIONALITY">NATIONALITY</label>
+        <input
+          type="text"
+          formControlName="nationality"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="TEL">TELEPHONE NUMBER</label>
+        <input
+          type="text"
+          formControlName="tel"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="STARTDATE">STARTING DATE</label>
+        <input
+          type="text"
+          formControlName="startDate"
+          class="border border-black px-10 rounded-md"
+        />
+      </div>
+    </div>
+    <button type="submit" class="mt-4 p-2 bg-blue-500 text-white">
+      Submit
+    </button>
+  </form>
+</div>
