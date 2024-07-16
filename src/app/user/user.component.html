@@ -101,7 +101,7 @@
               type="text"
               [readonly]="initData"
               [value]="initData?.nationality"
-              formControlName="nationality"
+              formControlName="position"
               class="border border-black rounded-md pr-10"
             />
             <select
@@ -109,7 +109,7 @@
               name="position"
               id="position"
               class="border border-black rounded-md pr-10"
-              formControlName="lastname"
+              formControlName="position"
             >
               <option value=""></option>
               <option *ngFor="let pos of this.position" [value]="pos">
