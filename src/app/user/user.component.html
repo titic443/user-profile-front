@@ -157,7 +157,10 @@
       [initData]="initData?.contactInfo"
       [initLocation]="location ? location : {}"
     ></app-contact>
-    <!-- <app-education></app-education> -->
+    <app-education
+      (formChange)="onContactFormChange($event)"
+      [initData]="initData?.educationInfo"
+    ></app-education>
     <button
       *ngIf="!initData"
       type="submit"

@@ -10,10 +10,10 @@ export interface IUserInfomation {
     profilePic?: string
     coverPic?: string
     contactInfo?: IContactInfo
-    educationInfo?: IEducationInfo[],
-    expirienceInfo?: IExperienceInfo[],
+    educationInfo?: IEducationInfo[]
+    expirienceInfo?: IExperienceInfo[]
     skillInfo?: ISkillInfo[]
-    interestInfo?: string[],
+    interestInfo?: string[]
     guildInfo?: string[]
 }
 
@@ -28,7 +28,7 @@ export interface IContactInfo {
     instagram?: string
 }
 
-interface IEducationInfo { year?: number, university?: string }
+export interface IEducationInfo { year?: string, university?: string }
 
 interface IExperienceInfo { fromDate?: string, toDate?: string, experience?: string }
 

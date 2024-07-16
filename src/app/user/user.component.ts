@@ -20,7 +20,6 @@ import { EducationComponent } from '../education/education.component';
 export class UserComponent {
   faCamera = faCamera;
   userForm: FormGroup
-  contactForm: FormGroup;
   position?: Array<string>
   // location?: Record<string, Record<string, string>>
   fileCover: File | null = null;
@@ -29,6 +28,8 @@ export class UserComponent {
   imageProfileUrl?: string | ArrayBuffer | null | undefined;
   initData?: IUserInfomation
   id?: string
+  contactForm: FormGroup;
+  educationForm: FormGroup;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.userForm = this.fb.group({
@@ -42,6 +43,7 @@ export class UserComponent {
       startDate: ['']
     });
     this.contactForm = this.fb.group({})
+    this.educationForm = this.fb.group([])
   }
 
 
@@ -133,10 +135,15 @@ export class UserComponent {
     this.contactForm = contactForm
   }
 
+  onEducationFormChange(educationForm: FormGroup): void {
+    this.educationForm = educationForm
+  }
+
   async onSubmit() {
     const combineData = {
       ...this.userForm.value,
-      contactInfo: { ...this.contactForm.value }
+      contactInfo: { ...this.contactForm.value },
+      // educationInfo: this.educationForm.value.educationList
     }
     console.log(combineData)
     await axios.post('http://localhost:3000/user', combineData)

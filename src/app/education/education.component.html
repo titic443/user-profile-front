@@ -1,1 +1,73 @@
-<p>education works!</p>
+<div class="flex flex-col mt-10 w-4/5 mx-auto h-screen">
+  <h1 class="text-2xl font-bold mb-6">EDUCATION INFORMATION</h1>
+  <div class="flex flex-col">
+    <button
+      *ngIf="initData"
+      class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
+    >
+      ADD EDUCATION
+
+      <div
+        *ngIf="initData"
+        class="flex justify-center items-start absolute top-[105%] left-[25%] text-gray-600 w-full"
+      >
+        <div
+          *ngIf="initData"
+          class="flex flex-col justify-center items-center pr-4 gap-20 mt-4"
+        >
+          <div *ngFor="let data of initData">{{ data.year }}</div>
+        </div>
+        <div
+          *ngIf="initData"
+          class="bg-gray-400 w-1 flex flex-col justify-center items-center gap-20"
+          [style.height]="calcHeight()"
+        >
+          <div
+            *ngFor="let count of initData"
+            class="w-4 h-4 rounded-full bg-blue-500"
+          ></div>
+        </div>
+        <div
+          *ngIf="initData"
+          class="flex flex-col justify-center items-center pl-4 gap-20 mt-4"
+        >
+          <div *ngFor="let data of initData">{{ data.university }}</div>
+        </div>
+      </div>
+    </button>
+    <button
+      class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
+      (click)="addEducationEntry()"
+    >
+      ADD EDUCATION
+    </button>
+    <form
+      [formGroup]="educationForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col items-center justify-center mx-auto text-lg"
+    >
+      <div
+        [formGroupName]="i"
+        *ngFor="let edu of educationList.controls; let i = index"
+        class="flex justify-center items-center relative mt-5 text-gray-600 w-full gap-4"
+      >
+        <input
+          type="text"
+          formControlName="year"
+          placeholder="Year"
+          class="border border-black rounded-md pr-10"
+        />
+        <input
+          type="text"
+          formControlName="university"
+          placeholder="University"
+          class="border border-black rounded-md pr-10"
+        />
+      </div>
+
+      <button type="submit" class="mt-5 p-1 bg-blue-500 text-white rounded-xl">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
