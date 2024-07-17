@@ -32,5 +32,5 @@ export interface IEducationInfo { year?: string, university?: string }
 
 export interface IExperienceInfo { fromDate?: string, toDate?: string, experience?: string }
 
-interface ISkillInfo { skill?: string, rate?: number }
+export interface ISkillInfo { skill?: string, rate?: number }
 

@@ -26,7 +26,7 @@ export class ExperienceComponent implements OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.initData)
+    console
     this.experienceForm.valueChanges.subscribe(() => {
       this.formChange.emit(this.experienceForm);
     });
@@ -63,11 +63,6 @@ export class ExperienceComponent implements OnChanges {
   }
 
   removeExperienceEntry(index: number) {
-    console.log(this.initData)
-    if (this.initData) {
-      console.log(index)
-    } else {
-      this.experienceList.removeAt(index)
-    }
+    this.experienceList.removeAt(index)
   }
 }

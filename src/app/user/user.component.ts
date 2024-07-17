@@ -10,11 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ContactComponent } from '../contact/contact.component';
 import { EducationComponent } from '../education/education.component';
 import { ExperienceComponent } from "../experience/experience.component";
+import { SkillComponent } from "../skill/skill.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule, ContactComponent, EducationComponent, ExperienceComponent],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule, ContactComponent, EducationComponent, ExperienceComponent, SkillComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -59,6 +60,7 @@ export class UserComponent {
     if (this.id) {
       this.fetchUserData(this.id).then(result => {
         this.initData = result;
+        console.log(this.initData)
       }).catch(error => {
         console.error('Error fetching user data:', error);
       });

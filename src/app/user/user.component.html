@@ -165,6 +165,7 @@
       [initData]="initData?.expirienceInfo"
       (formChange)="onExperienceFormChange($event)"
     ></app-experience>
+    <app-skill [initData]="initData?.skillInfo"></app-skill>
     <button
       *ngIf="!initData"
       type="submit"

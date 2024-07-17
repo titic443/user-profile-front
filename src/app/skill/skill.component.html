@@ -1,1 +1,23 @@
-<p>skill works!</p>
+<div class="flex flex-col mt-40 w-4/5 mx-auto h-screen">
+  <h1 class="text-2xl font-bold mb-6">SKILL INFORMATION</h1>
+  <div
+    *ngIf="initData"
+    class="border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
+  >
+    ADD EXPERIENCE
+  </div>
+  <div *ngIf="initData" class="">
+    <div class="flex flex-col gap-4">
+      <div *ngFor="let data of initData" class="grid grid-cols-3">
+        <div>{{ data.skill }}</div>
+        <div>{{ data.rate }}</div>
+        <div class="w-full bg-gray-400 relative rounded-lg">
+          <div
+            class="bg-blue-300 h-full absolute rounded-lg"
+            [style.width.%]="calScoreBar(data.rate)"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
