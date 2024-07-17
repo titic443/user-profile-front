@@ -9,11 +9,12 @@ import { ContactComponent } from './contact/contact.component';
 import { EducationComponent } from './education/education.component';
 import { ExperienceComponent } from './experience/experience.component';
 import { SkillComponent } from './skill/skill.component';
+import { InterestsComponent } from './interests/interests.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, UserComponent, ContactComponent, EducationComponent, ExperienceComponent, SkillComponent],
+  imports: [CommonModule, RouterOutlet, UserComponent, ContactComponent, EducationComponent, ExperienceComponent, SkillComponent, InterestsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -169,6 +169,10 @@
       [initData]="initData?.skillInfo"
       (formChange)="onSkillFormChange($event)"
     ></app-skill>
+    <app-interests
+      [initData]="initData?.interestInfo"
+      (formChange)="onInterestChange($event)"
+    ></app-interests>
     <button
       *ngIf="!initData"
       type="submit"
