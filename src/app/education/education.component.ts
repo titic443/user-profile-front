@@ -38,21 +38,10 @@ export class EducationComponent {
       university: ['']
     });
     this.educationList.push(educationEntry);
-    this.educationForm.value
   }
 
   removeEducationEntry(index: number) {
     this.educationList.removeAt(index)
   }
 
-  calcHeight(): string {
-    if (this.initData) {
-      const itemCount = this.initData.length;
-      const itemGap = 9;
-
-      const totalHeight = (itemGap * (itemCount - 1));
-      return `${totalHeight}rem`;
-    }
-    return `h-auto`
-  }
 }

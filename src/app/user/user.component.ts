@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { IEducationInfo, IUserInfomation } from '../../interface/IForm.interface';
+import { IEducationInfo, IExperienceInfo, IUserInfomation } from '../../interface/IForm.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ContactComponent } from '../contact/contact.component';
 import { EducationComponent } from '../education/education.component';
@@ -149,11 +149,13 @@ export class UserComponent {
   }
 
   async onSubmit() {
+    const educationList = this.educationForm?.value['educationList']
+    const experienceList = this.experienceForm?.value['experienceList']
     const combineData = {
       ...this.userForm.value,
       contactInfo: { ...this.contactForm.value },
-      educationInfo: [...this.educationForm.value['educationList']],
-      experienceInfo: [...this.experienceForm.value['experienceList']]
+      educationInfo: Array.isArray(educationList) ? [...educationList] : [],
+      experienceInfo: Array.isArray(experienceList) ? [...experienceList] : [],
     }
     console.log(combineData)
     await axios.post('http://localhost:3000/user', combineData)

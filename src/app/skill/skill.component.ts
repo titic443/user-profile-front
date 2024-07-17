@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ISkillInfo } from '../../interface/IForm.interface';
 
 @Component({
@@ -11,7 +11,15 @@ import { ISkillInfo } from '../../interface/IForm.interface';
   styleUrl: './skill.component.css'
 })
 export class SkillComponent {
+  skillForm: FormGroup
   @Input() initData?: ISkillInfo[]
+  @Output() formChange = new EventEmitter<FormGroup>();
+
+  constructor(private fb: FormBuilder) {
+    this.skillForm = this.fb.group({
+      skillList: this.fb.array([])
+    })
+  }
 
   calScoreBar(rate: number | undefined): string {
     if (this.initData && rate) {

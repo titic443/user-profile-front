@@ -12,7 +12,7 @@ import { faCamera, faCancel, faTimes } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.css'
 })
-export class ExperienceComponent implements OnChanges {
+export class ExperienceComponent {
   experienceForm: FormGroup
   faCamera = faTimes;
   initExperience?: IExperienceInfo[]
@@ -33,24 +33,12 @@ export class ExperienceComponent implements OnChanges {
   }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-    changes
-  }
 
   get experienceList() {
     return this.experienceForm.controls["experienceList"] as FormArray
   }
 
-  calcHeight(): string {
-    if (this.initData) {
-      const itemCount = this.initData.length;
-      const itemGap = 9;
 
-      const totalHeight = (itemGap * (itemCount - 1));
-      return `${totalHeight}rem`;
-    }
-    return `0rem`
-  }
 
   addExperienceEntry(): void {
     const educationEntry = this.fb.group({

@@ -1,40 +1,31 @@
-<div class="flex flex-col mt-10 w-4/5 mx-auto" [style.height]="calcHeight()">
+<div class="flex flex-col mt-10 w-4/5 mx-auto">
   <h1 class="text-2xl font-bold mb-6">EDUCATION INFORMATION</h1>
-  <div class="flex flex-col">
-    <div
-      *ngIf="initData"
-      class="relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl text-center my-auto"
-    >
-      ADD EDUCATION
-
+  <div class="flex flex-col items-center">
+    <div *ngIf="initData" class="flex flex-col items-center">
       <div
-        *ngIf="initData"
-        class="flex justify-center items-start absolute top-[105%] left-[25%] text-gray-600 w-full"
+        class="px-4 py-2 border-2 border-blue-500 text-blue-500 font-bold rounded-md"
       >
+        ADD EDUCATION
+      </div>
+      <div class="relative w-full">
         <div
-          *ngIf="initData"
-          class="flex flex-col justify-center items-center pr-4 gap-20 mt-4"
-        >
-          <div *ngFor="let data of initData">{{ data.year }}</div>
-        </div>
+          class="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-400"
+        ></div>
         <div
-          *ngIf="initData"
-          class="bg-gray-400 w-1 flex flex-col justify-center items-center gap-20"
-          [style.height]="calcHeight()"
+          *ngFor="let data of initData"
+          class="flex items-center w-full mb-8 mt-4"
         >
-          <div
-            *ngFor="let count of initData"
-            class="w-4 h-4 rounded-full bg-blue-500"
-          ></div>
-        </div>
-        <div
-          *ngIf="initData"
-          class="flex flex-col justify-center items-center pl-4 gap-14 mt-4"
-        >
-          <div *ngFor="let data of initData">{{ data.university }}</div>
+          <div class="flex-1 text-right pr-4">{{ data.year }}</div>
+          <div class="relative w-8 flex justify-center">
+            <div
+              class="w-4 h-4 rounded-full bg-blue-500 absolute left-1/2 transform -translate-x-1/2"
+            ></div>
+          </div>
+          <div class="flex-1 pl-4">{{ data.university }}</div>
         </div>
       </div>
     </div>
+
     <div
       *ngIf="!initData"
       [formGroup]="educationForm"
