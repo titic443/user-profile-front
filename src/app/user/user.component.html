@@ -161,7 +161,10 @@
       (formChange)="onEducationFormChange($event)"
       [initData]="initData?.educationInfo"
     ></app-education>
-    <app-experience></app-experience>
+    <app-experience
+      [initData]="initData?.expirienceInfo"
+      (formChange)="onExperienceFormChange($event)"
+    ></app-experience>
     <button
       *ngIf="!initData"
       type="submit"
