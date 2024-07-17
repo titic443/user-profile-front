@@ -177,12 +177,14 @@
       [initData]="initData?.guildInfo"
       (formChange)="onGuildChange($event)"
     ></app-guide>
-    <button
-      *ngIf="!initData"
-      type="submit"
-      class="mt-4 p-2 bg-blue-500 text-white"
-    >
-      Submit
-    </button>
+    <div class="h-[30vh] mt-10">
+      <button
+        *ngIf="!initData"
+        type="submit"
+        class="flex items-center justify-center text-center w-1/5 mx-auto p-2 bg-blue-500 text-white rounded-lg"
+      >
+        Submit
+      </button>
+    </div>
   </form>
 </div>

@@ -173,6 +173,7 @@ export class UserComponent {
     const skillList = this.skillForm?.value['skillList']
     const interestList = this.interestForm?.value['interestList']
     const guildList = this.guildForm?.value['guildList']
+    console.log(guildList)
     const combineData = {
       ...this.userForm.value,
       contactInfo: { ...this.contactForm.value },
