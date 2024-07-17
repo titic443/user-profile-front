@@ -38,6 +38,7 @@ export class UserComponent {
   skillForm: FormGroup;
   interestForm: FormGroup;
   guildForm: FormGroup
+  requestBody: FormData
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.userForm = this.fb.group({
@@ -56,6 +57,7 @@ export class UserComponent {
     this.skillForm = this.fb.group([])
     this.interestForm = this.fb.group([])
     this.guildForm = this.fb.group([])
+    this.requestBody = new FormData()
   }
 
 
@@ -128,6 +130,9 @@ export class UserComponent {
       reader.onload = (e: any) => {
         this.imageCoverUrl = e.target?.result
       }
+      // const formData = new FormData();
+      this.requestBody.append('coverImage', file, file.name);
+      // this.uploadFile(formData);
     }
     this.fileCover = file
   }
@@ -139,9 +144,17 @@ export class UserComponent {
       reader.readAsDataURL(file)
       reader.onload = (e: any) => {
         this.imageProfileUrl = e.target?.result
+        // }
+        // const formData = new FormData();
+        this.requestBody.append('profileImage', file, file.name);
+        // this.uploadFile(formData);
       }
+      this.fileProfile = file
     }
-    this.fileProfile = file
+  }
+
+  private async uploadFile(formData: FormData) {
+    await axios.post('http://localhost:3000/user/upload', formData)
   }
 
   onContactFormChange(contactForm: FormGroup): void {
@@ -167,23 +180,61 @@ export class UserComponent {
     this.guildForm = guild
   }
 
-  async onSubmit() {
-    const educationList = this.educationForm?.value['educationList']
-    const experienceList = this.experienceForm?.value['experienceList']
-    const skillList = this.skillForm?.value['skillList']
-    const interestList = this.interestForm?.value['interestList']
-    const guildList = this.guildForm?.value['guildList']
-    console.log(guildList)
-    const combineData = {
-      ...this.userForm.value,
-      contactInfo: { ...this.contactForm.value },
-      educationInfo: Array.isArray(educationList) ? [...educationList] : [],
-      experienceInfo: Array.isArray(experienceList) ? [...experienceList] : [],
-      skillInfo: Array.isArray(skillList) ? [...skillList] : [],
-      interestInfo: Array.isArray(interestList) ? interestList.map(v => v['interest']) : [],
-      guildInfo: Array.isArray(guildList) ? guildList.map(v => v["guildList"]) : []
-    }
-    console.log(combineData)
-    await axios.post('http://localhost:3000/user', combineData)
+  resetForms(): void {
+    this.userForm.reset();
+    this.contactForm.reset();
+    this.educationForm.reset();
+    this.experienceForm.reset();
+    this.skillForm.reset();
+    this.interestForm.reset();
+    this.guildForm.reset();
+    this.fileCover = null;
+    this.fileProfile = null;
+    this.imageCoverUrl = null;
+    this.imageProfileUrl = null;
+    this.requestBody = new FormData();
   }
+
+  async onSubmit() {
+    try {
+
+      const educationList = this.educationForm?.value['educationList']
+      const experienceList = this.experienceForm?.value['experienceList']
+      const skillList = this.skillForm?.value['skillList']
+      const interestList = this.interestForm?.value['interestList']
+      const guildList = this.guildForm?.value['guildList']
+      console.log(guildList)
+      const combineData = {
+        ...this.userForm.value,
+        contactInfo: { ...this.contactForm.value },
+        educationInfo: Array.isArray(educationList) ? [...educationList] : [],
+        experienceInfo: Array.isArray(experienceList) ? [...experienceList] : [],
+        skillInfo: Array.isArray(skillList) ? [...skillList] : [],
+        interestInfo: Array.isArray(interestList) ? interestList.map(v => v['interest']) : [],
+        guildInfo: Array.isArray(guildList) ? guildList.map(v => v["guildList"]) : []
+      }
+      for (const key in combineData) {
+        const value = combineData[key];
+        if (Array.isArray(value)) {
+          this.requestBody.append(key, JSON.stringify(value));
+        } else if (key === 'contactInfo') {
+          this.requestBody.append(key, JSON.stringify(value));
+        } else {
+          this.requestBody.append(key, value);
+        }
+      }
+
+      console.log(combineData)
+      console.log(this.requestBody)
+      await axios.post('http://localhost:3000/user/upload', this.requestBody, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      this.resetForms()
+    } catch (err) {
+      this.resetForms()
+    }
+  }
+
 }
