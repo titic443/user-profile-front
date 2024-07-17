@@ -1,11 +1,11 @@
-<div class="flex flex-col mt-40 w-4/5 mx-auto h-auto">
-  <h1 class="text-2xl font-bold mb-6">INTERESTS INFORMATION</h1>
+<div class="flex flex-col mt-40 w-4/5 mx-auto h-[50vh]">
+  <h1 class="text-2xl font-bold mb-6">GUIDE INFORMATION</h1>
 
   <div
     *ngIf="initData"
     class="border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl mb-4"
   >
-    ADD INTERESTS
+    ADD GUILD
   </div>
   <div
     *ngIf="initData"
@@ -17,7 +17,7 @@
     >
       <div class="flex gap-3 items-center">
         <div>{{ data }}</div>
-        <button (click)="onDeleteInterest(i)">
+        <button (click)="onDeleteGuild(i)">
           <fa-icon [icon]="faCamera"></fa-icon>
         </button>
       </div>
@@ -25,23 +25,23 @@
   </div>
   <div
     *ngIf="!initData"
-    [formGroup]="interestForm"
+    [formGroup]="guideForm"
     class="flex flex-col items-center justify-center"
   >
     <button
       type="button"
       class="mb-4 relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
-      (click)="addInterestEntry()"
+      (click)="addGuildEntry()"
     >
-      ADD INTERESTS
+      ADD GUILD
     </button>
 
     <div
-      formArrayName="interestList"
+      formArrayName="guildList"
       class="flex flex-col items-center justify-center"
     >
       <div
-        *ngFor="let edu of interestList.controls; let i = index"
+        *ngFor="let edu of guildList.controls; let i = index"
         class="flex justify-center mt-5 text-gray-600 gap-4"
         [formGroupName]="i"
       >
@@ -54,7 +54,7 @@
         <button
           type="button"
           class="ml-2 p-1 bg-red-500 text-white rounded-xl"
-          (click)="removeInterestEntry(i)"
+          (click)="removeGuildEntry(i)"
         >
           Remove
         </button>

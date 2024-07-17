@@ -173,6 +173,10 @@
       [initData]="initData?.interestInfo"
       (formChange)="onInterestChange($event)"
     ></app-interests>
+    <app-guide
+      [initData]="initData?.guildInfo"
+      (formChange)="onGuildChange($event)"
+    ></app-guide>
     <button
       *ngIf="!initData"
       type="submit"

@@ -10,11 +10,12 @@ import { EducationComponent } from './education/education.component';
 import { ExperienceComponent } from './experience/experience.component';
 import { SkillComponent } from './skill/skill.component';
 import { InterestsComponent } from './interests/interests.component';
+import { GuideComponent } from './guide/guide.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, UserComponent, ContactComponent, EducationComponent, ExperienceComponent, SkillComponent, InterestsComponent],
+  imports: [CommonModule, RouterOutlet, UserComponent, ContactComponent, EducationComponent, ExperienceComponent, SkillComponent, InterestsComponent, GuideComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

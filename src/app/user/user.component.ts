@@ -12,11 +12,12 @@ import { EducationComponent } from '../education/education.component';
 import { ExperienceComponent } from "../experience/experience.component";
 import { SkillComponent } from "../skill/skill.component";
 import { InterestsComponent } from '../interests/interests.component';
+import { GuideComponent } from "../guide/guide.component";
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule, ContactComponent, EducationComponent, ExperienceComponent, SkillComponent, InterestsComponent],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, HttpClientModule, ContactComponent, EducationComponent, ExperienceComponent, SkillComponent, InterestsComponent, GuideComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
@@ -36,6 +37,7 @@ export class UserComponent {
   experienceForm: FormGroup;
   skillForm: FormGroup;
   interestForm: FormGroup;
+  guildForm: FormGroup
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.userForm = this.fb.group({
@@ -53,6 +55,7 @@ export class UserComponent {
     this.experienceForm = this.fb.group([])
     this.skillForm = this.fb.group([])
     this.interestForm = this.fb.group([])
+    this.guildForm = this.fb.group([])
   }
 
 
@@ -160,18 +163,24 @@ export class UserComponent {
     this.interestForm = interest
   }
 
+  onGuildChange(guild: FormGroup): void {
+    this.guildForm = guild
+  }
+
   async onSubmit() {
     const educationList = this.educationForm?.value['educationList']
     const experienceList = this.experienceForm?.value['experienceList']
     const skillList = this.skillForm?.value['skillList']
     const interestList = this.interestForm?.value['interestList']
+    const guildList = this.guildForm?.value['guildList']
     const combineData = {
       ...this.userForm.value,
       contactInfo: { ...this.contactForm.value },
       educationInfo: Array.isArray(educationList) ? [...educationList] : [],
       experienceInfo: Array.isArray(experienceList) ? [...experienceList] : [],
       skillInfo: Array.isArray(skillList) ? [...skillList] : [],
-      interestInfo: Array.isArray(interestList) ? interestList.map(v => v['interest']) : []
+      interestInfo: Array.isArray(interestList) ? interestList.map(v => v['interest']) : [],
+      guildInfo: Array.isArray(guildList) ? guildList.map(v => v["guildList"]) : []
     }
     console.log(combineData)
     await axios.post('http://localhost:3000/user', combineData)
