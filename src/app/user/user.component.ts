@@ -33,6 +33,7 @@ export class UserComponent {
   contactForm: FormGroup;
   educationForm: FormGroup;
   experienceForm: FormGroup;
+  skillForm: FormGroup;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {
     this.userForm = this.fb.group({
@@ -48,6 +49,7 @@ export class UserComponent {
     this.contactForm = this.fb.group({})
     this.educationForm = this.fb.group([])
     this.experienceForm = this.fb.group([])
+    this.skillForm = this.fb.group([])
   }
 
 
@@ -147,15 +149,20 @@ export class UserComponent {
   onExperienceFormChange(experienceForm: FormGroup): void {
     this.experienceForm = experienceForm
   }
+  onSkillFormChange(skillForm: FormGroup): void {
+    this.skillForm = skillForm
+  }
 
   async onSubmit() {
     const educationList = this.educationForm?.value['educationList']
     const experienceList = this.experienceForm?.value['experienceList']
+    const skillList = this.skillForm?.value['skillList']
     const combineData = {
       ...this.userForm.value,
       contactInfo: { ...this.contactForm.value },
       educationInfo: Array.isArray(educationList) ? [...educationList] : [],
       experienceInfo: Array.isArray(experienceList) ? [...experienceList] : [],
+      skillInfo: Array.isArray(skillList) ? [...skillList] : [],
     }
     console.log(combineData)
     await axios.post('http://localhost:3000/user', combineData)

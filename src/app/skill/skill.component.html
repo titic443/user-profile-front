@@ -2,13 +2,13 @@
   <h1 class="text-2xl font-bold mb-6">SKILL INFORMATION</h1>
   <div
     *ngIf="initData"
-    class="border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
+    class="border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl mb-4"
   >
     ADD EXPERIENCE
   </div>
   <div *ngIf="initData" class="">
-    <div class="flex flex-col gap-4">
-      <div *ngFor="let data of initData" class="grid grid-cols-3">
+    <div class="flex flex-col gap-4 mt-5">
+      <div *ngFor="let data of initData" class="grid grid-cols-3 text-center">
         <div>{{ data.skill }}</div>
         <div>{{ data.rate }}</div>
         <div class="w-full bg-gray-400 relative rounded-lg">
@@ -17,6 +17,51 @@
             [style.width.%]="calScoreBar(data.rate)"
           ></div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="!initData"
+    [formGroup]="skillForm"
+    class="flex flex-col items-center justify-center"
+  >
+    <button
+      type="button"
+      class="mb-4 relative w-[28vh] h-[4vh] border-blue-500 border-2 rounded-md mx-auto px-2 text-blue-500 font-bold text-xl"
+      (click)="addSkillEntry()"
+    >
+      ADD EXPERIENCE
+    </button>
+
+    <div
+      formArrayName="skillList"
+      class="flex flex-col items-center justify-center"
+    >
+      <div
+        *ngFor="let edu of skillList.controls; let i = index"
+        [formGroupName]="i"
+        class="flex justify-center mt-5 text-gray-600 gap-4"
+      >
+        <input
+          type="text"
+          formControlName="skill"
+          placeholder="Skill"
+          class="border border-black rounded-md pr-10"
+        />
+        <input
+          type="number"
+          max="10"
+          formControlName="rate"
+          placeholder="Rate"
+          class="border border-black rounded-md pr-10"
+        />
+        <button
+          type="button"
+          class="ml-2 p-1 bg-red-500 text-white rounded-xl"
+          (click)="removeSkillEntry(i)"
+        >
+          Remove
+        </button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ISkillInfo } from '../../interface/IForm.interface';
 
 @Component({
@@ -20,6 +20,32 @@ export class SkillComponent {
       skillList: this.fb.array([])
     })
   }
+
+  get skillList() {
+    return this.skillForm.controls['skillList'] as FormArray
+  }
+
+  ngOnInit(): void {
+    console
+    this.skillForm.valueChanges.subscribe(() => {
+      this.formChange.emit(this.skillForm);
+    });
+  }
+
+
+  addSkillEntry() {
+    const skill = this.fb.group({
+      skill: [''],
+      rate: [0]
+    })
+    this.skillList.push(skill)
+    console.log(this.skillList.value)
+  }
+
+  removeSkillEntry(index: number) {
+    this.skillList.removeAt(index)
+  }
+
 
   calScoreBar(rate: number | undefined): string {
     if (this.initData && rate) {
