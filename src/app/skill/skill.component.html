@@ -50,11 +50,17 @@
         />
         <input
           type="number"
-          max="10"
           formControlName="rate"
           placeholder="Rate"
           class="border border-black rounded-md pr-10"
         />
+        <div
+          *ngIf="skillList.controls[i].getRawValue()['rate'] > 10"
+          class="font-bold text-red-600 flex items-center justify-center"
+        >
+          Value cannot exceed 10.
+        </div>
+
         <button
           type="button"
           class="ml-2 p-1 bg-red-500 text-white rounded-xl"

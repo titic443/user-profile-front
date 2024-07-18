@@ -170,6 +170,7 @@
     <app-skill
       [initData]="initData?.skillInfo"
       (formChange)="onSkillFormChange($event)"
+      (hasError)="onError($event)"
     ></app-skill>
     <app-interests
       [initData]="initData?.interestInfo"
@@ -181,9 +182,14 @@
     ></app-guide>
     <div class="h-[30vh] mt-10">
       <button
+        [disabled]="hasFormError"
         *ngIf="!initData"
         type="submit"
-        class="flex items-center justify-center text-center w-1/5 mx-auto p-2 bg-blue-500 text-white rounded-lg"
+        class="flex items-center justify-center text-center w-1/5 mx-auto p-2 text-white rounded-lg"
+        [ngClass]="{
+          'bg-blue-500': !hasFormError,
+          'bg-gray-400': hasFormError
+        }"
       >
         Submit
       </button>

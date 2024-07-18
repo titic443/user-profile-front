@@ -39,6 +39,7 @@ export class UserComponent {
   interestForm: FormGroup;
   guildForm: FormGroup
   requestBody: FormData
+  hasFormError = false;
 
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient) {
@@ -105,6 +106,10 @@ export class UserComponent {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  onError(status: boolean) {
+    this.hasFormError = status
   }
 
   async fetchUserData(id: string): Promise<IUserInfomation> {

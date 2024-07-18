@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { ISkillInfo } from '../../interface/IForm.interface';
 
 @Component({
@@ -14,6 +14,8 @@ export class SkillComponent {
   skillForm: FormGroup
   @Input() initData?: ISkillInfo[]
   @Output() formChange = new EventEmitter<FormGroup>();
+  @Output() hasError = new EventEmitter<boolean>();
+
 
   constructor(private fb: FormBuilder) {
     this.skillForm = this.fb.group({
@@ -26,20 +28,24 @@ export class SkillComponent {
   }
 
   ngOnInit(): void {
-    console
     this.skillForm.valueChanges.subscribe(() => {
+      const err = this.skillList.controls.find((v) => v.getRawValue()['rate'] > 10)
+      if (err) {
+        this.hasError.emit(true)
+      }
       this.formChange.emit(this.skillForm);
     });
   }
+
 
 
   addSkillEntry() {
     const skill = this.fb.group({
       skill: [''],
       rate: [0]
+      // rate: [0, [Validators.required, this.maxValidator(10)]]
     })
     this.skillList.push(skill)
-    console.log(this.skillList.value)
   }
 
   removeSkillEntry(index: number) {
@@ -55,4 +61,14 @@ export class SkillComponent {
     }
     return `0`
   }
+
+  maxValidator(max: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      return value > max ? { 'max': { value: max } } : null;
+    };
+  }
 }
+
+
+
