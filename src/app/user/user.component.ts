@@ -40,7 +40,8 @@ export class UserComponent {
   guildForm: FormGroup
   requestBody: FormData
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient) {
     this.userForm = this.fb.group({
       username: [''],
       nickname: [''],
@@ -58,6 +59,7 @@ export class UserComponent {
     this.interestForm = this.fb.group([])
     this.guildForm = this.fb.group([])
     this.requestBody = new FormData()
+
   }
 
 
@@ -68,9 +70,14 @@ export class UserComponent {
       this.id = params['id']
     })
     if (this.id) {
+      console.log(this.id)
       this.fetchUserData(this.id).then(result => {
         this.initData = result;
         console.log(this.initData)
+        if (this.initData.profilePic && this.initData.coverPic) {
+          this.getImage(this.initData.profilePic).then((v) => this.imageProfileUrl = v)
+          this.getImage(this.initData.coverPic).then((v) => this.imageCoverUrl = v)
+        }
       }).catch(error => {
         console.error('Error fetching user data:', error);
       });
@@ -85,9 +92,24 @@ export class UserComponent {
     }
   }
 
+  async getImage(filename: string): Promise<any> {
+    try {
+      console.log('call')
+      const result = await axios.get('http://localhost:3000/user/image/' + filename, { headers: { "Content-Type": "image/jpeg" } })
+
+      return result.data
+      // console.log(result.data)
+      // const imageBase64 = Buffer.from(result.data, 'binary').toString('base64');
+      // console.log(imageBase64)
+      // return 'data:image/jpeg;base64,' + imageBase64;
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   async fetchUserData(id: string): Promise<IUserInfomation> {
     try {
-      const result = await axios.get<IUserInfomation>(`http://localhost:3000/user/${this.id}`)
+      const result = await axios.get<IUserInfomation>(`http://localhost:3000/user/${this.id}`, { headers: { "Content-Type": "application/json" } })
       if (result.status == 200) {
         return result.data;
       }

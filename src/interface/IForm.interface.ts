@@ -7,11 +7,11 @@ export interface IUserInfomation {
     nationality?: string
     tel?: string
     startDate?: string
-    profilePic?: string
-    coverPic?: string
+    profilePic?: any
+    coverPic?: any
     contactInfo?: IContactInfo
     educationInfo?: IEducationInfo[]
-    expirienceInfo?: IExperienceInfo[]
+    experienceInfo?: IExperienceInfo[]
     skillInfo?: ISkillInfo[]
     interestInfo?: string[]
     guildInfo?: string[]
