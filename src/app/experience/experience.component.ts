@@ -42,7 +42,7 @@ export class ExperienceComponent {
 
   addExperienceEntry(): void {
     const educationEntry = this.fb.group({
-      formDate: [''],
+      fromDate: [''],
       toDate: [''],
       experience: ['']
     });

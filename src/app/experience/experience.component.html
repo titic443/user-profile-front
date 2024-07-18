@@ -1,12 +1,11 @@
 <div class="flex flex-col mt-40 w-4/5 mx-auto">
   <h1 class="text-2xl font-bold mb-6">EXPERIENCE INFORMATION</h1>
   <div class="flex flex-col items-center">
-    {{ initData }}
     <div *ngIf="initData" class="flex flex-col items-center">
       <div
         class="px-4 py-2 border-2 border-blue-500 text-blue-500 font-bold rounded-md"
       >
-        ADD EXPERIENCE 5555
+        EXPERIENCE
       </div>
       <div class="relative">
         <div
@@ -26,7 +25,7 @@
             class="flex-1 pl-4 border border-gray-400 rounded-lg flex justify-between"
           >
             {{ data.experience }}:{{ data.fromDate }} - {{ data.toDate }}
-            <button class="">
+            <button class="mr-5">
               <fa-icon [icon]="faCamera"></fa-icon>
             </button>
           </div>
@@ -64,7 +63,7 @@
           />
           <input
             type="date"
-            formControlName="formDate"
+            formControlName="fromDate"
             placeholder="Form Date"
             class="border border-black rounded-md pr-10"
           />
